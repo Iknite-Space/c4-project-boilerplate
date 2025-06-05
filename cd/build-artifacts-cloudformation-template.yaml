@@ -13,11 +13,20 @@ Resources:
     Properties:
       BucketName: !Join ["-", ["infra-artifacts", !Ref "AWS::AccountId"]]
 
+  AppArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join ["-", ["app-artifacts", !Ref "AWS::AccountId"]]
+
 ## Output Values
 Outputs:
   InfraArtifactsBucket:
     Description: Artifact Bucket
     Value: !Ref "InfraArtifactsBucket"
+
+  AppArtifactsBucket:
+    Description: App Artifact Bucket (for static hosting)
+    Value: !Ref "AppArtifactsBucket"
 
   EcrRepositoryApiArn:
     Description: Users ECR Repository Arn
