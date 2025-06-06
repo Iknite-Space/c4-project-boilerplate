@@ -104,7 +104,7 @@ Resources:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-#         Comment: !Sub 'CloudFront OAI for ${DomainName}'
+        Comment: !Sub 'CloudFront OAI for ${DomainName}'
 
 #   WebsiteDNSName:
 #     Type: AWS::Route53::RecordSet
