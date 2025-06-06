@@ -120,6 +120,8 @@ Resources:
               Value: !Ref AWS::Region
             - Name: WEBHOOKS_BUCKET_NAME
               Value: !Sub "${EnvId}-${AWS::AccountId}-data-ingest"
+            - Name: MIGRATIONS_PATH
+              Value: "/app/migrations"
           Secrets:
             - Name: DB_NAME
               ValueFrom: !Sub "${AppDatabaseSecret}:dbname::"

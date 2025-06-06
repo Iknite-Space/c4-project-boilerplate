@@ -207,7 +207,7 @@ Resources:
               !GetAtt VpcStack.Outputs.SubnetBPrivate,
             ],
           ]
-        DesiredCount: 1
+        DesiredCount: 2
         DomainName: !Ref DomainName
         LoadBalancerCanonicalHostedZoneID: !GetAtt LoadBalancerStack.Outputs.LoadBalancerCanonicalHostedZoneID
         LoadBalancerDNSName: !GetAtt LoadBalancerStack.Outputs.LoadBalancerDNSName
