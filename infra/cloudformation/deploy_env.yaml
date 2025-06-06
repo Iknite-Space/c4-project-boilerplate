@@ -57,54 +57,54 @@ Resources:
           ],
         ]
 
-  # #  RdsStack nested stack deploys the Rds instance..
-  # RdsStack:
-  #   Type: AWS::CloudFormation::Stack
-  #   DependsOn: [VpcStack]
-  #   Properties:
-  #     Parameters:
-  #       EnvId: !Ref "EnvId"
-  #       IsDevelopmentGrade: true
-  #       VpcId: !GetAtt VpcStack.Outputs.VPC
-  #       SubnetIds:
-  #         !Join [
-  #           ",",
-  #           [
-  #             !GetAtt VpcStack.Outputs.SubnetAPrivate,
-  #             !GetAtt VpcStack.Outputs.SubnetBPrivate,
-  #           ],
-  #         ]
-  #       PublicSubnetIds:
-  #         !Join [
-  #           ",",
-  #           [
-  #             !GetAtt VpcStack.Outputs.SubnetAPublic,
-  #             !GetAtt VpcStack.Outputs.SubnetBPublic,
-  #           ],
-  #         ]
-  #       LambdaS3BucketName: !Ref InfraArtifactsBucket
-  #       LambdaS3KeyPrefix:
-  #         !Join [
-  #           "",
-  #           [
-  #             !Ref InfraReleaseHash,
-  #             "/cloudformation/aws-cloudformation-templates",
-  #           ],
-  #         ]
-  #     Tags:
-  #       - Key: EnvId
-  #         Value: !Ref "EnvId"
-  #     TemplateURL:
-  #       !Join [
-  #         "",
-  #         [
-  #           "https://s3.amazonaws.com/",
-  #           !Ref "InfraArtifactsBucket",
-  #           "/",
-  #           !Ref "InfraReleaseHash",
-  #           "/cloudformation//aws-cloudformation-templates/core-components/rds.yaml",
-  #         ],
-  #       ]
+  #  RdsStack nested stack deploys the Rds instance..
+  RdsStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: [VpcStack]
+    Properties:
+      Parameters:
+        EnvId: !Ref "EnvId"
+        IsDevelopmentGrade: true
+        VpcId: !GetAtt VpcStack.Outputs.VPC
+        SubnetIds:
+          !Join [
+            ",",
+            [
+              !GetAtt VpcStack.Outputs.SubnetAPrivate,
+              !GetAtt VpcStack.Outputs.SubnetBPrivate,
+            ],
+          ]
+        PublicSubnetIds:
+          !Join [
+            ",",
+            [
+              !GetAtt VpcStack.Outputs.SubnetAPublic,
+              !GetAtt VpcStack.Outputs.SubnetBPublic,
+            ],
+          ]
+        LambdaS3BucketName: !Ref InfraArtifactsBucket
+        LambdaS3KeyPrefix:
+          !Join [
+            "",
+            [
+              !Ref InfraReleaseHash,
+              "/cloudformation/aws-cloudformation-templates",
+            ],
+          ]
+      Tags:
+        - Key: EnvId
+          Value: !Ref "EnvId"
+      TemplateURL:
+        !Join [
+          "",
+          [
+            "https://s3.amazonaws.com/",
+            !Ref "InfraArtifactsBucket",
+            "/",
+            !Ref "InfraReleaseHash",
+            "/cloudformation/aws-cloudformation-templates/core-components/rds.yaml",
+          ],
+        ]
 
   # EcsStack:
   #   Type: AWS::CloudFormation::Stack
