@@ -106,47 +106,47 @@ Resources:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub 'CloudFront OAI for ${DomainName}'
 
-#   WebsiteDNSName:
-#     Type: AWS::Route53::RecordSet
-#     Properties:
-#       HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
-#       Comment: CNAME redirect custom name to CloudFront distribution
-#       Name: !Join ['', [!Ref 'AWS::StackName', !Ref 'AWS::AccountId', ., !Ref 'AWS::Region',
-#           ., !Ref 'DomainName']]
-#       Type: CNAME
-#       TTL: '900'
-#       ResourceRecords:
-#       - !GetAtt [WebsiteCDN, DomainName]
-#   ARecord:
-#     Type: AWS::Route53::RecordSet
-#     Properties: 
-#       AliasTarget: 
-#         DNSName: !GetAtt [WebsiteCDN, DomainName]
-#         HostedZoneId: 'Z2FDTNDATAQYW2'
-#       HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
-#       Name: !Join ['', [!Ref 'DomainName', .]]
-#       Comment: Root A record pointing to cloudfront
-#       Type: A
+  WebsiteDNSName:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
+      Comment: CNAME redirect custom name to CloudFront distribution
+      Name: !Join ['', [!Ref 'AWS::StackName', !Ref 'AWS::AccountId', ., !Ref 'AWS::Region',
+          ., !Ref 'DomainName']]
+      Type: CNAME
+      TTL: '900'
+      ResourceRecords:
+      - !GetAtt [WebsiteCDN, DomainName]
+  ARecord:
+    Type: AWS::Route53::RecordSet
+    Properties: 
+      AliasTarget: 
+        DNSName: !GetAtt [WebsiteCDN, DomainName]
+        HostedZoneId: 'Z2FDTNDATAQYW2'
+      HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
+      Name: !Join ['', [!Ref 'DomainName', .]]
+      Comment: Root A record pointing to cloudfront
+      Type: A
 
-#   WWWARecord:
-#     Type: AWS::Route53::RecordSet
-#     Properties: 
-#       AliasTarget: 
-#         DNSName: !GetAtt [WebsiteCDN, DomainName]
-#         HostedZoneId: 'Z2FDTNDATAQYW2'
-#       HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
-#       Name: !Join ['', ['www.', !Ref 'DomainName', .]]
-#       Comment: www A record pointing to cloudfront
-#       Type: A
+  WWWARecord:
+    Type: AWS::Route53::RecordSet
+    Properties: 
+      AliasTarget: 
+        DNSName: !GetAtt [WebsiteCDN, DomainName]
+        HostedZoneId: 'Z2FDTNDATAQYW2'
+      HostedZoneName: !Join ['', [!Ref 'DomainName', .]]
+      Name: !Join ['', ['www.', !Ref 'DomainName', .]]
+      Comment: www A record pointing to cloudfront
+      Type: A
 
 
-# Outputs:
-#   WebsiteURL:
-#     Value: !Join ['', ['https://', !Ref 'WebsiteDNSName']]
-#     Description: The URL of the newly created website
-#   BucketName:
-#     Value: !Ref 'S3BucketForWebsiteContent'
-#     Description: Name of S3 bucket to hold website content
-#   DistributionID:
-#     Value: !Ref 'WebsiteCDN'
-#     Description: The Cloudfront distribution id.
+Outputs:
+  WebsiteURL:
+    Value: !Join ['', ['https://', !Ref 'WebsiteDNSName']]
+    Description: The URL of the newly created website
+  BucketName:
+    Value: !Ref 'S3BucketForWebsiteContent'
+    Description: Name of S3 bucket to hold website content
+  DistributionID:
+    Value: !Ref 'WebsiteCDN'
+    Description: The Cloudfront distribution id.
