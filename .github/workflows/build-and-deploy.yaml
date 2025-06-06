@@ -197,3 +197,5 @@ jobs:
                   --stack-name "$stack_name"  \
                   --no-fail-on-empty-changeset \
                   --capabilities CAPABILITY_NAMED_IAM
+
+                # aws cloudfront create-invalidation --distribution-id <your_distribution_id> --paths '/*'

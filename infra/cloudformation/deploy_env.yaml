@@ -272,3 +272,8 @@ Resources:
           ],
         ]
 
+
+Outputs:
+  AppCloudfrontDistributionId:
+    Description: The ID of the CloudFront distribution for the web application.
+    Value: !GetAtt AppStack.Outputs.CloudfrontDistributionId

@@ -141,12 +141,6 @@ Resources:
 
 
 Outputs:
-  WebsiteURL:
-    Value: !Join ['', ['https://', !Ref 'WebsiteDNSName']]
-    Description: The URL of the newly created website
-  BucketName:
-    Value: !Ref 'S3BucketForWebsiteContent'
-    Description: Name of S3 bucket to hold website content
-  DistributionID:
-    Value: !Ref 'WebsiteCDN'
-    Description: The Cloudfront distribution id.
+  CloudfrontDistributionId:
+    Description: The ID of the CloudFront distribution
+    Value: !Ref WebsiteCDN
