@@ -193,15 +193,6 @@ Resources:
         - ContainerName: App
           ContainerPort: !Ref ContainerPort
           TargetGroupArn: !Ref ApiTargetGroup
-      ServiceConnectConfiguration:
-        Enabled: true
-        Namespace: !Sub "${EnvId}"
-        Services:
-          - PortName: grpc
-            DiscoveryName: !Sub "${EnvId}-${AppName}-grpc"
-            ClientAliases:
-              - DnsName: !Ref AppName
-                Port: !Ref ContainerPort
 
   ApiTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup

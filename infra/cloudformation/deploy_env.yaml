@@ -186,6 +186,14 @@ Resources:
           ],
         ]
 
+  EcsSecurityGroupALBports:
+    Type: "AWS::EC2::SecurityGroupIngress"
+    Properties:
+      GroupId: !GetAtt EcsStack.Outputs.EcsSecurityGroupId
+      IpProtocol: tcp
+      FromPort: 80
+      ToPort: 61000
+      SourceSecurityGroupId: !GetAtt LoadBalancerStack.Outputs.LoadBalancerSecurityGroupId
 
   ApiStack:
     Type: AWS::CloudFormation::Stack
