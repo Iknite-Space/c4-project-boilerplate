@@ -1,1 +1,2 @@
-aws_account_id: 239703526381
+aws_account_id: "239703526381"
+domain_name: "c4-project-boilerplate.xyz"
