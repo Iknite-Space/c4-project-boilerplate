@@ -11,7 +11,7 @@ Parameters:
     ConstraintDescription: must be a valid DNS zone name.
   WebCert:
     Type: String
-    Description: The ARN of the webcert to use wit hthe CloudFr    Description: The ARN of the webcert to use wit hthe CloudFront distribution.
+    Description: "The ARN of the webcert to use wit hthe CloudFront dDescription: The ARN of the webcert to use wit hthe CloudFront distribution."
   BucketName:
     Type: String
     Description: The name of the S3 bucket to hold website content.
