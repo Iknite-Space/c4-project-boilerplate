@@ -242,11 +242,3 @@ Resources:
         DNSName: !Ref LoadBalancerDNSName
         HostedZoneId: !Ref LoadBalancerCanonicalHostedZoneID
 
-Outputs:
-  DataIngestBucketName:
-    Description: The bucket used to store the data that is ingested from external services (e.g. Webhooks)
-    Value: !Ref DataIngestBucket2
-
-  FlutterwaveWebhooksTopicArn:
-    Description: The SNS topic that the service publishes mutation events to
-    Value: !Ref FlutterwaveWebhooksTopic  
