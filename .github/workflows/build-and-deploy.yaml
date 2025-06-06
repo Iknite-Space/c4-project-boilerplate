@@ -167,11 +167,11 @@ jobs:
       - name: Publish Cloudformation templates to Amazon S3
         run: |
           
-          stack_name="deplaoy--dev"
+          stack_name="deploy-dev"
           commit_hash="$GITHUB_SHA"
           full_image_tag="${{ steps.read_config.outputs.aws_account_id }}.dkr.ecr.us-east-1.amazonaws.com/api:$commit_hash"
           bucket_name="infra-artifacts-${{ steps.read_config.outputs.aws_account_id }}"
-          s3_path="s3:/$bucket_name//$commit_hash/"
+          s3_path="s3://$bucket_name/$commit_hash"
           domain_name="${{ steps.read_config.outputs.domain_name }}"
 
           cf_template_file="./deploy_env.yaml"
