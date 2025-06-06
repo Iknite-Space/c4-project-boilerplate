@@ -12,6 +12,9 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Join ["-", ["infra-artifacts", !Ref "AWS::AccountId"]]
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
 
   AppArtifactsBucket:
     Type: AWS::S3::Bucket

@@ -175,9 +175,10 @@ jobs:
           stack_name="deploy-dev"
           commit_hash="$GITHUB_SHA"
           full_image_tag="${{ steps.read_config.outputs.aws_account_id }}.dkr.ecr.us-east-1.amazonaws.com/api:$commit_hash"
-          bucket_name="infra-artifacts-${{ steps.read_config.outputs.aws_account_id }}"
-          s3_path="s3://$bucket_name/$commit_hash"
+          infra_bucket_name="infra-artifacts-${{ steps.read_config.outputs.aws_account_id }}"
+          s3_path="s3://$infra_bucket_name/$commit_hash"
           domain_name="${{ steps.read_config.outputs.domain_name }}"
+          app_bucket_name="app-artifacts-${{ steps.read_config.outputs.aws_account_id }}" 
 
           cf_template_file="./deploy_env.yaml"
           aws s3 cp "$s3_path/cloudformation/deploy_env.yaml" $cf_template_file
@@ -186,11 +187,13 @@ jobs:
                   --template-file "$cf_template_file" \
                   --parameter-overrides \
                       EnvId="dev" \
-                      InfraArtifactsBucket="$bucket_name" \
+                      InfraArtifactsBucket="$infra_bucket_name" \
                       InfraReleaseHash="$commit_hash" \
                       ApiImageTag="$full_image_tag" \
                       ReleaseTarget="main" \
                       DomainName="$domain_name" \
+                      AppReleaseHash="$commit_hash" \
+                      AppBucketName="$app_bucket_name" \
                   --stack-name "$stack_name"  \
                   --no-fail-on-empty-changeset \
                   --capabilities CAPABILITY_NAMED_IAM

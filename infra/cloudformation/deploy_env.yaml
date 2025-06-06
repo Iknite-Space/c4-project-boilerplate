@@ -25,6 +25,12 @@ Parameters:
   DomainName:
     Type: String
     Description: The domain name for the environment.
+  AppReleaseHash:
+    Type: String
+    Description: The git commit hash of the web application code that is being deployed to this environment.
+  AppBucketName:
+    Type: String
+    Description: The name of the S3 bucket to hold the web application content.
 
 
 Resources:
@@ -238,4 +244,31 @@ Resources:
           ],
         ]
 
+
+
+  AppStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn:
+      - VpcStack
+      - RdsStack
+    Properties:
+      Parameters:
+        DomainName: !Ref DomainName
+        WebCert: !Ref WebCert
+        BucketName: !Ref AppBucketName
+        AppReleaseHash: !Ref AppReleaseHash
+      Tags:
+        - Key: EnvId
+          Value: !Ref "EnvId"
+      TemplateURL:
+        !Join [
+          "",
+          [
+            "https://s3.amazonaws.com/",
+            !Ref "InfraArtifactsBucket",
+            "/",
+            !Ref "InfraReleaseHash",
+            "/cloudformation/services/app.yaml",
+          ],
+        ]
 
