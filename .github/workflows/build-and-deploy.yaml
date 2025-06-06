@@ -1,6 +1,11 @@
 name: Build and Deploy
 ## This workflow will build the app and deploy the project
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+
 on:
   push:
     branches: [ "main" ]
