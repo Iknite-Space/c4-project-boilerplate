@@ -51,9 +51,9 @@ Resources:
           [
             "https://s3.amazonaws.com/",
             !Ref "InfraArtifactsBucket",
-            "/cloudformation/",
+            "/",
             !Ref "InfraReleaseHash",
-            "/aws-cloudformation-templates/core-components/vpc.yaml",
+            "/cloudformation/aws-cloudformation-templates/core-components/vpc.yaml",
           ],
         ]
 
@@ -87,9 +87,8 @@ Resources:
           !Join [
             "",
             [
-              "cloudformation/",
               !Ref InfraReleaseHash,
-              "/aws-cloudformation-templates",
+              "/cloudformation/aws-cloudformation-templates",
             ],
           ]
       Tags:
@@ -101,9 +100,9 @@ Resources:
           [
             "https://s3.amazonaws.com/",
             !Ref "InfraArtifactsBucket",
-            "/cloudformation/",
+            "/",
             !Ref "InfraReleaseHash",
-            "/aws-cloudformation-templates/core-components/rds.yaml",
+            "/cloudformation//aws-cloudformation-templates/core-components/rds.yaml",
           ],
         ]
 
@@ -136,9 +135,9 @@ Resources:
           [
             "https://s3.amazonaws.com/",
             !Ref "InfraArtifactsBucket",
-            "/cloudformation/",
+            "/",
             !Ref "InfraReleaseHash",
-            "/aws-cloudformation-templates/core-components/ecs.yaml",
+            "/cloudformation/aws-cloudformation-templates/core-components/ecs.yaml",
           ],
         ]
 
@@ -181,9 +180,9 @@ Resources:
           [
             "https://s3.amazonaws.com/",
             !Ref "InfraArtifactsBucket",
-            "/cloudformation/",
+            "/",
             !Ref "InfraReleaseHash",
-            "/aws-cloudformation-templates/core-components/load_balancer.yaml",
+            "/cloudformation/aws-cloudformation-templates/core-components/load_balancer.yaml",
           ],
         ]
 
@@ -223,9 +222,9 @@ Resources:
           [
             "https://s3.amazonaws.com/",
             !Ref "InfraArtifactsBucket",
-            "/cloudformation/",
+            "/",
             !Ref "InfraReleaseHash",
-            "/services/api.yaml",
+            "/cloudformation/services/api.yaml",
           ],
         ]
 
