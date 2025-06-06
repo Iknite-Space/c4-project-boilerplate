@@ -1,4 +1,4 @@
-name: Artifact Account Setup
+name: Build and Deploy
 ## This workflow will build the app and deploy the project
 
 on:
