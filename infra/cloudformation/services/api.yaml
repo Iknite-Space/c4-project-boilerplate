@@ -121,7 +121,7 @@ Resources:
             - Name: WEBHOOKS_BUCKET_NAME
               Value: !Sub "${EnvId}-${AWS::AccountId}-data-ingest"
           Secrets:
-          - Name: DB_NAME
+            - Name: DB_NAME
               ValueFrom: !Sub "${AppDatabaseSecret}:dbname::"
             - Name: DB_USER
               ValueFrom: !Sub "${AppDatabaseSecret}:username::"
