@@ -212,6 +212,9 @@ Resources:
         LoadBalancerCanonicalHostedZoneID: !GetAtt LoadBalancerStack.Outputs.LoadBalancerCanonicalHostedZoneID
         LoadBalancerDNSName: !GetAtt LoadBalancerStack.Outputs.LoadBalancerDNSName
         HttpsListener: !GetAtt LoadBalancerStack.Outputs.HttpsListener
+        DbAdminSecretArn: !GetAtt "RdsStack.Outputs.AdminSecretArn"
+        CustomResourcesServiceToken: !GetAtt RdsStack.Outputs.DatabaseInitLambdaArn
+
       Tags:
         - Key: EnvId
           Value: !Ref "EnvId"
