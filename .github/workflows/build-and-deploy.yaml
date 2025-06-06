@@ -164,7 +164,7 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::${{ steps.read_config.outputs.aws_account_id }}:role/deploy
 
-      - name: Publish Cloudformation templates to Amazon S3
+      - name: Deploy Environment
         run: |
           
           stack_name="deploy-dev"
@@ -174,7 +174,7 @@ jobs:
           s3_path="s3://$bucket_name/$commit_hash"
           domain_name="${{ steps.read_config.outputs.domain_name }}"
 
-          cf_template_file="./deploy_env.yaml"
+          cf_template_file="./cloudformation/deploy_env.yaml"
           aws s3 cp "$s3_path/deploy_env.yaml" $cf_template_file
 
           aws cloudformation deploy \
