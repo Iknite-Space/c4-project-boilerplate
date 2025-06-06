@@ -95,5 +95,6 @@ jobs:
           s3_path="s3://app-artifacts-${{ steps.read_aws_account_id.outputs.aws_account_id }}/$commit_hash/"
 
             cd app
+            npm install
             npm run build
             aws s3 cp ./build "$s3_path" --recursive
