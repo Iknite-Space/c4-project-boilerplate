@@ -11,11 +11,11 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://github.com/Iknite-Space/c4-project-boilerplate"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Project Source Code
         </a>
       </header>
     </div>
