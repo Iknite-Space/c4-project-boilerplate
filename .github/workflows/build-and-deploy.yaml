@@ -174,8 +174,8 @@ jobs:
           s3_path="s3://$bucket_name/$commit_hash"
           domain_name="${{ steps.read_config.outputs.domain_name }}"
 
-          cf_template_file="./cloudformation/deploy_env.yaml"
-          aws s3 cp "$s3_path/deploy_env.yaml" $cf_template_file
+          cf_template_file="./deploy_env.yaml"
+          aws s3 cp "$s3_path/cloudformation/deploy_env.yaml" $cf_template_file
 
           aws cloudformation deploy \
                   --template-file "$cf_template_file" \
