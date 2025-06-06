@@ -106,40 +106,40 @@ Resources:
           ],
         ]
 
-  # EcsStack:
-  #   Type: AWS::CloudFormation::Stack
-  #   Properties:
-  #     Parameters:
-  #       EnvId: !Ref "EnvId"
-  #       IsDevelopmentGrade: true
-  #       VpcId: !GetAtt VpcStack.Outputs.VPC
-  #       PrivateSubnetIds:
-  #         !Join [
-  #           ",",
-  #           [
-  #             !GetAtt VpcStack.Outputs.SubnetAPrivate,
-  #             !GetAtt VpcStack.Outputs.SubnetBPrivate,
-  #           ],
-  #         ]
-  #       AdditionalNodeSecurityGroupIds: !GetAtt RdsStack.Outputs.ClientSecurityGroupId
-  #       NumPrivateNodes: 1
-  #       InstanceType: t2.micro
-  #     Tags:
-  #       - Key: EnvId
-  #         Value: !Ref "EnvId"
-  #       - Key: ReleaseTarget
-  #         Value: !Ref "ReleaseTarget"
-  #     TemplateURL:
-  #       !Join [
-  #         "",
-  #         [
-  #           "https://s3.amazonaws.com/",
-  #           !Ref "InfraArtifactsBucket",
-  #           "/",
-  #           !Ref "InfraReleaseHash",
-  #           "/cloudformation/aws-cloudformation-templates/core-components/ecs.yaml",
-  #         ],
-  #       ]
+  EcsStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Parameters:
+        EnvId: !Ref "EnvId"
+        IsDevelopmentGrade: true
+        VpcId: !GetAtt VpcStack.Outputs.VPC
+        PrivateSubnetIds:
+          !Join [
+            ",",
+            [
+              !GetAtt VpcStack.Outputs.SubnetAPrivate,
+              !GetAtt VpcStack.Outputs.SubnetBPrivate,
+            ],
+          ]
+        AdditionalNodeSecurityGroupIds: !GetAtt RdsStack.Outputs.ClientSecurityGroupId
+        NumPrivateNodes: 1
+        InstanceType: t2.micro
+      Tags:
+        - Key: EnvId
+          Value: !Ref "EnvId"
+        - Key: ReleaseTarget
+          Value: !Ref "ReleaseTarget"
+      TemplateURL:
+        !Join [
+          "",
+          [
+            "https://s3.amazonaws.com/",
+            !Ref "InfraArtifactsBucket",
+            "/",
+            !Ref "InfraReleaseHash",
+            "/cloudformation/aws-cloudformation-templates/core-components/ecs.yaml",
+          ],
+        ]
 
   # # WebCert deploys the web certificates.
   # WebCert:
