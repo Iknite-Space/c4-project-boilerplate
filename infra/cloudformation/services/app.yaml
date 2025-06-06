@@ -62,43 +62,43 @@ Resources:
               CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
 
 
-#   WebsiteCDN:
-#     Type: AWS::CloudFront::Distribution
-#     Properties:
-#       DistributionConfig:
-#         Comment: CDN for S3-backed website
-#         Aliases:
-#         - !Join ['', ['www', '.', !Ref 'DomainName']]
-#         - !Ref 'DomainName'
-#         Enabled: 'true'
-#         HttpVersion: http2
-#         DefaultCacheBehavior:
-#           ForwardedValues:
-#             QueryString: 'true'
-#           TargetOriginId: the-s3-bucket
-#           ViewerProtocolPolicy: redirect-to-https
-#           Compress: true
-#         DefaultRootObject: index.html
-#         CustomErrorResponses:
-#           - ErrorCachingMinTTL: 300
-#             ErrorCode: 403
-#             ResponseCode: 404
-#             ResponsePagePath: /404.html
-#           - ErrorCachingMinTTL: 300
-#             ErrorCode: 404
-#             ResponseCode: 404
-#             ResponsePagePath: /404.html
-#         Origins:
-#           - DomainName: !Join ['', [!Ref BucketName, '.s3.amazonaws.com']]
-#             Id: the-s3-bucket
-#             OriginPath: !Join ['', ['/', !Ref AppReleaseHash]]
-#             S3OriginConfig:
-#               OriginAccessIdentity:
-#                 !Join ['', ['origin-access-identity/cloudfront/', !Ref CloudFrontOriginAccessIdentity]]
-#         ViewerCertificate:  
-#           AcmCertificateArn: !Ref 'WebCert'
-#           MinimumProtocolVersion: 'TLSv1.1_2016'
-#           SslSupportMethod: 'sni-only'
+  WebsiteCDN:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: CDN for S3-backed website
+        Aliases:
+        - !Join ['', ['www', '.', !Ref 'DomainName']]
+        - !Ref 'DomainName'
+        Enabled: 'true'
+        HttpVersion: http2
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: 'true'
+          TargetOriginId: the-s3-bucket
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+        DefaultRootObject: index.html
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 403
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+        Origins:
+          - DomainName: !Join ['', [!Ref BucketName, '.s3.amazonaws.com']]
+            Id: the-s3-bucket
+            OriginPath: !Join ['', ['/', !Ref AppReleaseHash]]
+            S3OriginConfig:
+              OriginAccessIdentity:
+                !Join ['', ['origin-access-identity/cloudfront/', !Ref CloudFrontOriginAccessIdentity]]
+        ViewerCertificate:  
+          AcmCertificateArn: !Ref 'WebCert'
+          MinimumProtocolVersion: 'TLSv1.1_2016'
+          SslSupportMethod: 'sni-only'
   
   CloudFrontOriginAccessIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
