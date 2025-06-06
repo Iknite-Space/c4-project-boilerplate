@@ -212,7 +212,6 @@ Resources:
         LoadBalancerCanonicalHostedZoneID: !GetAtt LoadBalancerStack.Outputs.LoadBalancerCanonicalHostedZoneID
         LoadBalancerDNSName: !GetAtt LoadBalancerStack.Outputs.LoadBalancerDNSName
         HttpsListener: !GetAtt LoadBalancerStack.Outputs.HttpsListener
-        FirebaseServiceAccountSecretArn: !GetAtt "ThirdPartySecretsStack.Outputs.FirebaseServiceAccountSecretArn"
       Tags:
         - Key: EnvId
           Value: !Ref "EnvId"
