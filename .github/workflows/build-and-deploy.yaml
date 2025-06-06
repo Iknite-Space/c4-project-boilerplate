@@ -1,0 +1,60 @@
+name: Artifact Account Setup
+## This workflow will build the app and deploy the project
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - "cd/config.yaml"
+      - "cd/build-and-deploy.yaml"
+      - "api/**"
+      - "app/**"
+      - "infra/**"
+
+# Necessary permissions for workflow
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  BuildApi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Install awscli
+      - uses: unfor19/install-aws-cli-action@v1
+
+      - uses: mikefarah/yq@v4.44.3
+        with:
+            cmd: yq -V
+
+
+      - name: Read the account id of the Artifact account
+        id: read_aws_account_id
+        run: |
+          AWS_ACCOUNT_ID=$(yq eval '.aws_account_id' cd/config.yaml)
+          # Set the value as an output
+            echo "aws_account_id=$AWS_ACCOUNT_ID" >> $GITHUB_OUTPUT
+      
+      # Assume the OIDC Role to get temporary credentials 
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::${{ steps.read_aws_account_id.outputs.aws_account_id }}:role/deploy
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Docker Image and Push to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          commit_hash="$GITHUB_SHA"
+          full_image_tag="${{ steps.read_aws_account_id.outputs.aws_account_id }}.dkr.ecr.us-east-1.amazonaws.com/api:$commit_hash"
+
+            cd api
+            docker build -t "$full_image_tag" .
+            docker push $full_image_tag
+
